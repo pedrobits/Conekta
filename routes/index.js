@@ -6,9 +6,10 @@ const routes = (app) => {
   });
 
   // user
-  app.get("/users", userController.listarUsuarios)
+  app.get("/users", userController.listarUsuarios);
   app.post("/users/create", userController.novoUsuario);
-  app.put("/users/edit", userController.editarUsuario)
+  app.put("/users/edit", userController.editarUsuario);
+  app.post("/login", userController.logarUsuario);
 };
 
 export default routes;
