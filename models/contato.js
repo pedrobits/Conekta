@@ -5,24 +5,20 @@ const contatoSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
       index: true,
     },
     email: {
       type: String,
-      unique: true,
       sparse: true,
       trim: true,
       lowercase: true,
     },
     mobile: {
       type: String,
-      unique: true,
       sparse: true,
     },
     Tel1: {
       type: String,
-      unique: true,
       sparse: true,
     },
     address: {

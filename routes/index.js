@@ -15,8 +15,16 @@ const routes = (app) => {
 
   // contatos
   app.get("/contatos", middlewares.verifyJwt, contatoController.listarContatos);
-  // app.post("/contatos/create", contatoController.novoContato);
-  // app.put("/contatos/edit", contatoController.editarContato);
+  app.post(
+    "/contatos/create",
+    middlewares.verifyJwt,
+    contatoController.criarContato
+  );
+  app.put(
+    "/contatos/edit",
+    middlewares.verifyJwt,
+    contatoController.editarContato
+  );
 };
 
 export default routes;
