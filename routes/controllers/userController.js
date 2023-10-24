@@ -2,7 +2,6 @@ import User from "../../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-
 class UserController {
   static listarUsuarios = async (_req, res) => {
     try {
@@ -118,31 +117,41 @@ class UserController {
 
   static logarUsuario = async (req, res) => {
     const { email, password } = req.body;
-  
+
     if (!email || !password) {
       return res.status(400).json({ erro: "Sim", mensagem: "Dados inválidos" });
     }
-  
+
     try {
       // Encontre o usuário com o e-mail fornecido
       const user = await User.findOne({ email: email });
-  
+
       if (!user) {
-        return res.status(400).json({ erro: "Sim", mensagem: "Usuário não encontrado" });
+        return res
+          .status(400)
+          .json({ erro: "Sim", mensagem: "Usuário não encontrado" });
       }
-  
+
       // Acesse a senha do usuário a partir do resultado da consulta
       const storedPasswordHash = user.password;
-  
+
       // Compare a senha fornecida com a senha armazenada no banco de dados
       const senhaCorreta = await bcrypt.compare(password, storedPasswordHash);
-  
+
       if (senhaCorreta) {
         // Crie um token JWT
-        const token = jwt.sign({ userId: user._id }, process.env.HashJWT, {
-          expiresIn: '300d'
-        });
-  
+        const token = jwt.sign(
+          {
+            userId: user._id,
+            email: user.email,
+            nome: user.nome, // Adicione os campos que você deseja incluir
+          },
+          process.env.HashJWT,
+          {
+            expiresIn: "300d",
+          }
+        );
+
         // Retorne o token no corpo da resposta
         return res.status(200).json({
           sucesso: "Sim",
@@ -150,7 +159,9 @@ class UserController {
           token: token,
         });
       } else {
-        return res.status(400).json({ erro: "Sim", mensagem: "Senha incorreta" });
+        return res
+          .status(400)
+          .json({ erro: "Sim", mensagem: "Senha incorreta" });
       }
     } catch (error) {
       console.error("Erro:", error);
@@ -160,7 +171,6 @@ class UserController {
       });
     }
   };
-  
 }
 
 export default UserController;
