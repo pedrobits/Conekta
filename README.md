@@ -4,7 +4,7 @@
 
 ## Descrição
 
-ConektaAPI é uma API simples para gerenciar contatos e usuários. Ela oferece funcionalidades básicas, como listar usuários, criar novos usuários, listar contatos de um usuário, criar novos contatos e editar contatos. A API é construída em JavaScript usando o Node.js e Express.js e utiliza um banco de dados MongoDB para armazenar os dados.
+ConektaAPI é uma API simples para gerenciar contatos e usuários. Ela oferece funcionalidades básicas, como listar usuários, criar novos usuários, listar contatos de um usuário, criar novos contatos e editar contatos. A API é construída em JavaScript usando o Node.js e Express.js e utiliza um banco de dados MongoDB para armazenar os dados, além de utilizar JWT para autenticação do usuário.
 
 ## Requisitos
 
